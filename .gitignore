@@ -1,0 +1,6 @@
+node_modules/
+.wrangler/
+
+# Local secrets (RESEND_API_KEY, NOTIFICATION_EMAIL)
+# Add secrets to Cloudflare dashboard, not here
+.dev.vars

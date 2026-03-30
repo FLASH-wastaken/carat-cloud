@@ -1,0 +1,16 @@
+{
+  "name": "carat-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev":                "wrangler pages dev public",
+    "deploy":             "wrangler pages deploy public",
+    "db:create":          "wrangler d1 create carat-cloud-db",
+    "db:migrate":         "wrangler d1 execute carat-cloud-db --file=./schema.sql",
+    "db:migrate:remote":  "wrangler d1 execute carat-cloud-db --remote --file=./schema.sql",
+    "db:studio":          "wrangler d1 execute carat-cloud-db --command \"SELECT * FROM contacts ORDER BY created_at DESC LIMIT 20\""
+  },
+  "devDependencies": {
+    "wrangler": "^3.101.0"
+  }
+}
