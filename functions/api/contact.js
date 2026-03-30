@@ -32,6 +32,9 @@ export async function onRequestPost(context) {
     }
 
     // Store in D1
+    if (!env.DB) {
+        return json({ error: 'Database not configured. Please add D1 binding in Cloudflare dashboard.' }, 503);
+    }
     try {
         await env.DB.prepare(
             `INSERT INTO contacts (name, email, company, message)

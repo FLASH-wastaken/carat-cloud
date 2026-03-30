@@ -419,6 +419,23 @@
         </div>
     </div>
 
+    <!-- ===================== VIDEO MODAL ===================== -->
+    <div id="videoModal" class="modal-overlay fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6">
+        <div class="absolute inset-0 bg-on-surface/60 backdrop-blur-sm" id="videoBackdrop"></div>
+        <div class="modal-card relative w-full max-w-3xl rounded-xl shadow-2xl overflow-hidden" style="background:#000">
+            <button id="closeVideo" class="absolute top-3 right-3 z-10 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white transition-colors" aria-label="Close">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+            <div class="aspect-video flex items-center justify-center text-center p-10">
+                <div>
+                    <span class="material-symbols-outlined text-6xl text-primary mb-4 block">play_circle</span>
+                    <h3 class="text-white text-xl font-semibold mb-2">Coming Soon</h3>
+                    <p class="text-white/60 text-sm">Our brand film is currently in production. Stay tuned.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ===================== NAV ===================== -->
     <nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-xl h-20 transition-shadow duration-300" style="background:var(--nav-bg)">
         <div class="flex justify-between items-center max-w-[1440px] mx-auto px-6 md:px-10 h-full">
@@ -479,7 +496,7 @@
                     <button data-modal class="px-8 md:px-10 py-4 md:py-5 bg-gradient-to-tr from-primary to-primary-container text-on-primary font-bold rounded shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-[1.02] active:scale-95">
                         Explore the Ecosystem
                     </button>
-                    <button class="flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-sm group">
+                    <button id="watchFilmBtn" class="flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-sm group">
                         Watch Film
                         <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">play_circle</span>
                     </button>
@@ -844,6 +861,21 @@
         document.getElementById('closeModal').addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        // === Video Modal ===
+        const videoModal = document.getElementById('videoModal');
+        const videoBackdrop = document.getElementById('videoBackdrop');
+        document.getElementById('watchFilmBtn').addEventListener('click', () => {
+            videoModal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+        function closeVideo() {
+            videoModal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('closeVideo').addEventListener('click', closeVideo);
+        videoBackdrop.addEventListener('click', closeVideo);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
 
         // === Contact Form ===
         const contactForm = document.getElementById('contactForm');

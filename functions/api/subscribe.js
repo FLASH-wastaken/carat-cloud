@@ -28,6 +28,9 @@ export async function onRequestPost(context) {
     const normalizedEmail = email.trim().toLowerCase();
 
     // Store in D1 — handle duplicate gracefully
+    if (!env.DB) {
+        return json({ error: 'Database not configured. Please add D1 binding in Cloudflare dashboard.' }, 503);
+    }
     try {
         await env.DB.prepare(
             `INSERT INTO subscribers (email) VALUES (?)`
