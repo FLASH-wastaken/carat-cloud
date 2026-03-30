@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Carat Cloud | The Digital Lapidary Experience</title>
     <meta name="description" content="The world's most sophisticated cloud ecosystem for diamond houses, jewelry artisans, and global retailers. Precision-cut intelligence for the modern era."/>
     <meta name="theme-color" content="#385d8e"/>
+    <meta name="author" content="Carat Cloud"/>
     <link rel="canonical" href="https://caratcloud.net/"/>
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32"/>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+    <link rel="manifest" href="/manifest.json"/>
 
     <!-- Open Graph -->
     <meta property="og:title" content="Carat Cloud | The Digital Lapidary Experience"/>
@@ -14,17 +20,63 @@
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://caratcloud.net/"/>
     <meta property="og:site_name" content="Carat Cloud"/>
+    <meta property="og:image" content="https://caratcloud.net/og-image.png"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content="Carat Cloud — Diamond cloud with brilliance"/>
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:title" content="Carat Cloud | The Digital Lapidary Experience"/>
     <meta name="twitter:description" content="Precision-cut intelligence for the modern era of diamond and jewelry commerce."/>
+    <meta name="twitter:image" content="https://caratcloud.net/og-image.png"/>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Carat Cloud",
+        "url": "https://caratcloud.net",
+        "logo": "https://caratcloud.net/logo-dark-web.png",
+        "description": "The world's most sophisticated cloud ecosystem for diamond houses, jewelry artisans, and global retailers. Precision-cut intelligence for the modern era.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Join the waitlist"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Carat Cloud",
+            "url": "https://caratcloud.net",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://caratcloud.net/logo-dark-web.png"
+            }
+        }
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <!-- Dark/Light Mode: detect system preference immediately to prevent flash -->
+    <script>
+        (function() {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.add(prefersDark ? 'dark' : 'light');
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                document.documentElement.classList.remove('dark', 'light');
+                document.documentElement.classList.add(e.matches ? 'dark' : 'light');
+            });
+        })();
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -34,40 +86,40 @@
             theme: {
                 extend: {
                     colors: {
-                        "surface-variant": "#e0e3e5",
-                        "on-background": "#191c1e",
-                        "surface-container-high": "#e6e8ea",
-                        "surface": "#f7f9fb",
-                        "secondary": "#466178",
-                        "on-tertiary": "#ffffff",
+                        "surface-variant": "var(--surface-variant)",
+                        "on-background": "var(--on-background)",
+                        "surface-container-high": "var(--surface-container-high)",
+                        "surface": "var(--surface)",
+                        "secondary": "var(--secondary)",
+                        "on-tertiary": "var(--on-tertiary)",
                         "on-primary-fixed": "#001c3a",
                         "secondary-fixed-dim": "#aecae4",
-                        "tertiary": "#4d5e69",
-                        "on-primary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "on-surface-variant": "#414751",
-                        "outline-variant": "#c1c7d3",
-                        "on-primary-container": "#fefcff",
-                        "primary": "#385d8e",
+                        "tertiary": "var(--tertiary)",
+                        "on-primary": "var(--on-primary)",
+                        "surface-container-lowest": "var(--surface-container-lowest)",
+                        "on-surface-variant": "var(--on-surface-variant)",
+                        "outline-variant": "var(--outline-variant)",
+                        "on-primary-container": "var(--on-primary-container)",
+                        "primary": "var(--primary)",
                         "primary-fixed-dim": "#a5c8ff",
-                        "on-secondary": "#ffffff",
-                        "primary-container": "#5276a8",
+                        "on-secondary": "var(--on-secondary)",
+                        "primary-container": "var(--primary-container)",
                         "on-secondary-fixed-variant": "#2e495f",
-                        "on-secondary-container": "#4a657c",
-                        "surface-container": "#eceef0",
+                        "on-secondary-container": "var(--on-secondary-container)",
+                        "surface-container": "var(--surface-container)",
                         "secondary-fixed": "#cbe6ff",
-                        "surface-dim": "#d8dadc",
-                        "secondary-container": "#c7e3fe",
-                        "surface-container-low": "#f2f4f6",
-                        "surface-container-highest": "#e0e3e5",
+                        "surface-dim": "var(--surface-dim)",
+                        "secondary-container": "var(--secondary-container)",
+                        "surface-container-low": "var(--surface-container-low)",
+                        "surface-container-highest": "var(--surface-container-highest)",
                         "on-primary-fixed-variant": "#204877",
-                        "outline": "#717783",
-                        "primary-fixed": "#d4e3ff",
-                        "on-surface": "#191c1e",
-                        "surface-bright": "#f7f9fb",
-                        "tertiary-container": "#667782",
-                        "background": "#f7f9fb",
-                        "surface-variant": "#e0e3e5",
+                        "outline": "var(--outline)",
+                        "primary-fixed": "var(--primary-fixed)",
+                        "on-surface": "var(--on-surface)",
+                        "surface-bright": "var(--surface-bright)",
+                        "tertiary-container": "var(--tertiary-container)",
+                        "background": "var(--background)",
+                        "on-primary-fixed": "#001c3a",
                     },
                     fontFamily: {
                         "headline": ["Noto Serif", "serif"],
@@ -87,24 +139,116 @@
         }
     </script>
     <style>
+        /* ========== Light Theme (default) ========== */
+        :root, .light {
+            --primary: #385d8e;
+            --on-primary: #ffffff;
+            --primary-container: #5276a8;
+            --on-primary-container: #fefcff;
+            --primary-fixed: #d4e3ff;
+            --secondary: #466178;
+            --on-secondary: #ffffff;
+            --secondary-container: #c7e3fe;
+            --on-secondary-container: #4a657c;
+            --tertiary: #4d5e69;
+            --on-tertiary: #ffffff;
+            --tertiary-container: #667782;
+            --surface: #f7f9fb;
+            --on-surface: #191c1e;
+            --surface-variant: #e0e3e5;
+            --on-surface-variant: #414751;
+            --surface-container-lowest: #ffffff;
+            --surface-container-low: #f2f4f6;
+            --surface-container: #eceef0;
+            --surface-container-high: #e6e8ea;
+            --surface-container-highest: #e0e3e5;
+            --surface-dim: #d8dadc;
+            --surface-bright: #f7f9fb;
+            --background: #f7f9fb;
+            --on-background: #191c1e;
+            --outline: #717783;
+            --outline-variant: #c1c7d3;
+            /* Hardcoded overrides */
+            --white-surface: #ffffff;
+            --nav-bg: rgba(255,255,255,0.8);
+            --nav-mobile-bg: rgba(255,255,255,0.95);
+            --modal-card-bg: #ffffff;
+            --card-hover-bg: #ffffff;
+            --gradient-fade: #ffffff;
+            --loader-bg: #f7f9fb;
+            --scrollbar-track: #f2f4f6;
+            --scrollbar-thumb: #c1c7d3;
+            --input-focus-ring: rgba(56, 93, 142, 0.15);
+            --green-accent: #15803d;
+            color-scheme: light;
+        }
+
+        /* ========== Dark Theme ========== */
+        .dark {
+            --primary: #a5c8ff;
+            --on-primary: #003060;
+            --primary-container: #204877;
+            --on-primary-container: #d4e3ff;
+            --primary-fixed: #1a2a40;
+            --secondary: #aecae4;
+            --on-secondary: #17344a;
+            --secondary-container: #2e495f;
+            --on-secondary-container: #cbe6ff;
+            --tertiary: #b5c8d3;
+            --on-tertiary: #1f3039;
+            --tertiary-container: #364850;
+            --surface: #111315;
+            --on-surface: #e1e3e5;
+            --surface-variant: #414751;
+            --on-surface-variant: #c1c7d3;
+            --surface-container-lowest: #0b0d0f;
+            --surface-container-low: #191c1e;
+            --surface-container: #1e2124;
+            --surface-container-high: #282b2e;
+            --surface-container-highest: #333638;
+            --surface-dim: #111315;
+            --surface-bright: #353739;
+            --background: #111315;
+            --on-background: #e1e3e5;
+            --outline: #8b919d;
+            --outline-variant: #414751;
+            /* Hardcoded overrides */
+            --white-surface: #1e2124;
+            --nav-bg: rgba(17,19,21,0.85);
+            --nav-mobile-bg: rgba(17,19,21,0.95);
+            --modal-card-bg: #1e2124;
+            --card-hover-bg: #282b2e;
+            --gradient-fade: #111315;
+            --loader-bg: #111315;
+            --scrollbar-track: #191c1e;
+            --scrollbar-thumb: #414751;
+            --input-focus-ring: rgba(165, 200, 255, 0.2);
+            --green-accent: #4ade80;
+            color-scheme: dark;
+        }
+
+        /* Smooth theme transition */
+        html { transition: color 0.4s ease, background-color 0.4s ease; }
+        body, nav, .modal-card, section, footer { transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
+
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         body {
             font-family: 'Manrope', sans-serif;
-            background-color: #f7f9fb;
-            color: #191c1e;
+            background-color: var(--surface);
+            color: var(--on-surface);
         }
         html { scroll-behavior: auto; }
         h1, h2, h3, .font-serif { font-family: 'Noto Serif', serif; }
 
         .crystalline-glass {
-            background: rgba(247, 249, 251, 0.8);
+            background: var(--nav-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
         .jewel-box {
-            background-color: #d4e3ff;
+            background-color: var(--primary-fixed);
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             background-blend-mode: overlay;
         }
@@ -172,26 +316,26 @@
         /* Input focus */
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #385d8e !important;
-            box-shadow: 0 0 0 3px rgba(56, 93, 142, 0.15);
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px var(--input-focus-ring);
         }
 
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f2f4f6; }
-        ::-webkit-scrollbar-thumb { background: #c1c7d3; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+        ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
 
         /* Loader */
         .loader {
             position: fixed; inset: 0; z-index: 9999;
-            background: #f7f9fb;
+            background: var(--loader-bg);
             display: flex; align-items: center; justify-content: center;
             transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         .loader.gone { opacity: 0; visibility: hidden; }
         .loader-gem {
             width: 36px; height: 36px;
-            background: linear-gradient(135deg, #385d8e, #5276a8);
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
             transform: rotate(45deg);
             animation: gem-pulse 1.2s ease-in-out infinite;
         }
@@ -207,9 +351,19 @@
         }
         #backToTop.show { opacity: 1; transform: translateY(0); pointer-events: all; }
 
+        /* Foundation card hover */
+        .foundation-card:hover { background: var(--card-hover-bg) !important; }
+        /* Stat cards */
+        .stat-card { background: var(--white-surface); }
+        /* Green accent */
+        .text-green-600 { color: var(--green-accent) !important; }
+
         /* Form states */
         .form-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
         .form-error   { background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; }
+        .dark .form-success { background: #052e16; border-color: #166534; color: #4ade80; }
+        .dark .form-error   { background: #450a0a; border-color: #991b1b; color: #f87171; }
+
     </style>
 </head>
 <body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
@@ -220,7 +374,7 @@
     <!-- ===================== CONTACT MODAL ===================== -->
     <div id="contactModal" class="modal-overlay fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-6">
         <div class="absolute inset-0 bg-on-surface/40 backdrop-blur-sm" id="modalBackdrop"></div>
-        <div class="modal-card relative bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-xl shadow-2xl p-8 sm:p-10">
+        <div class="modal-card relative w-full sm:max-w-lg rounded-t-3xl sm:rounded-xl shadow-2xl p-8 sm:p-10" style="background:var(--modal-card-bg)">
             <!-- Header -->
             <div class="flex items-start justify-between mb-8">
                 <div>
@@ -266,9 +420,12 @@
     </div>
 
     <!-- ===================== NAV ===================== -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl h-20 transition-shadow duration-300">
+    <nav id="navbar" class="fixed top-0 w-full z-50 backdrop-blur-xl h-20 transition-shadow duration-300" style="background:var(--nav-bg)">
         <div class="flex justify-between items-center max-w-[1440px] mx-auto px-6 md:px-10 h-full">
-            <a href="#" class="text-2xl font-serif italic text-primary">Carat Cloud</a>
+            <a href="#" class="flex items-center h-16">
+                <img src="/logo-light-web.png" alt="Carat Cloud" class="h-16 w-auto dark:hidden" id="navLogoLight"/>
+                <img src="/logo-dark-web.png" alt="Carat Cloud" class="h-16 w-auto hidden dark:block" id="navLogoDark"/>
+            </a>
             <div class="hidden md:flex items-center gap-10 font-body text-sm tracking-wide">
                 <a class="text-primary font-semibold border-b-2 border-primary pb-1" href="#suite">Suite</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors" href="#intelligence">Intelligence</a>
@@ -285,7 +442,7 @@
             </div>
         </div>
         <!-- Mobile menu -->
-        <div id="mobileMenu" class="mobile-menu md:hidden bg-white/95 backdrop-blur-xl border-t border-outline-variant/10">
+        <div id="mobileMenu" class="mobile-menu md:hidden backdrop-blur-xl border-t border-outline-variant/10" style="background:var(--nav-mobile-bg)">
             <div class="flex flex-col px-6 py-4 gap-1">
                 <a class="text-primary font-semibold py-2.5" href="#suite" onclick="closeMobileMenu()">Suite</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors py-2.5" href="#intelligence" onclick="closeMobileMenu()">Intelligence</a>
@@ -330,7 +487,7 @@
             </div>
             <div class="relative group reveal-right">
                 <div class="absolute -inset-4 bg-gradient-to-tr from-primary/10 to-transparent rounded-xl blur-2xl"></div>
-                <img class="relative w-full rounded-xl shadow-2xl perspective-card border border-white/20"
+                <img class="relative w-full rounded-xl shadow-2xl perspective-card border border-outline-variant/20"
                      alt="Close-up of a high-end luxury diamond ring resting on a polished white marble surface with sharp crystalline shadows"
                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYPd_WvjwykLgr4jgZqL6cHRftugygeP7TrSguBbcUgMIXMMiGGeHjCWAifDPiCn2cKhrSbk97MXRK0Np8RQG5nk2MwvKV1o3JBhvupWOJa0wtQMzxmFiB5bJmf639cQXTBxCQ-8OTP4HTOcAnoTIZInSVmJ_gLFKyYAqf_EgpaMtYhaSGZUHQ7pXUYI4_ffbLvWuoQgqthv64V8SH6yj3DV6wnljP2Iw9fPzkMc4ZPd_IobF6a8rb0utWQqbkjtOkNMjm6fqNmGoW"
                      loading="eager"/>
@@ -347,7 +504,7 @@
         <div class="max-w-[1440px] mx-auto">
             <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
                 <div class="w-full md:w-1/2 order-2 md:order-1 reveal-left">
-                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-outline-variant/20">
+                    <div class="p-6 md:p-8 rounded-xl shadow-sm border border-outline-variant/20" style="background:var(--white-surface)">
                         <div class="flex justify-between items-center mb-10">
                             <div>
                                 <h3 class="font-headline text-xl md:text-2xl">Live Arbitrage Matrix</h3>
@@ -410,11 +567,11 @@
                     </div>
                 </div>
                 <div class="relative reveal-right">
-                    <img class="w-full rounded-3xl shadow-2xl border-8 border-white"
+                    <img class="w-full rounded-3xl shadow-2xl" style="border:8px solid var(--white-surface)"
                          alt="A smartphone showing a 3D digital engagement ring placed onto a real person's hand via AR"
-                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7yW1aLpUyQ0pitqqYWiN8TsCmcqTfmT-roA8SEp1gFG61SqR40SMicFjAEy4Th2HL_CyDoyohnVZpDHJdg9fHNVE_HHuNzw59J6OhQEbLVfmsa45ooCYsRj8WGEMtLmKAHGVp6YU5QcAaUbJkmE2gIJ0gFqgOgUD7ofzTR6AOA_iIAuiKMPfqJwAuDwmPd9tyQCV6MF7J27cEmAIGUQkTTU13mFttRNENYghUNFrALTANze89d5WRg70KtIoUGhl98xgkZEObPE_R"
+                         src="/img-ar.png"
                          loading="lazy"/>
-                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-xl">
+                    <div class="absolute -bottom-6 -right-6 p-6 rounded-xl shadow-xl" style="background:var(--white-surface)">
                         <span class="material-symbols-outlined text-primary text-5xl">view_in_ar</span>
                     </div>
                 </div>
@@ -435,7 +592,7 @@
                 </div>
                 <img class="rounded-lg shadow-lg"
                      alt="Professional 3D CAD software interface showing a jewelry design with wireframes and gold textures"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA3FWannqo7c1TzABhHWDK_pnZdTSWeN0ASoOwd3p3jdMIwClQAUQj_Da7Wha7yNldqhmxKIEYrzrDTtKTrS_bR2eAPV9Z1vQp675jjYGPu0H7ik-kd_OONSx0GkdKLNsZW41HT7s3vXFI0vht5bkFIkluwSSkjMqGdT2NnF-88e9UVJ38Rrqhf07hexvEXrfVggOatBNRSSe5CEe0SZL9nJsjKcFWJanI9ETOnyUtR3E79RBdN0FvBeJHQqjzaXxqVzb-5x1RN-nq"
+                     src="/img-cad.png"
                      loading="lazy"/>
             </div>
             <div class="bg-surface-container-highest p-8 md:p-12 rounded-xl flex flex-col justify-between min-h-[520px] md:min-h-[600px] border border-outline-variant/30 reveal-right">
@@ -449,13 +606,13 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="space-y-3">
                         <img class="rounded opacity-50" alt="Raw uncut diamond stones on a neutral background"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtT0IYQ8ezV5MbrrffW8G7K04j6Kw2Lsx4S54_sH5piLvBXXCnv7so4kXlSHn967IE0uKuBoC92PQ6zWESAIUjSPuqoyl-i0XlhZ7Cdj13mQT-PKPNA5n4i9Wjww2jHC1FDnnN0VUmLqCDlH1WjNtAEvXdnoUA8RVa7vUtyCLOkLbPViqlqikEQyR0sSkshs7XBTiM3mdRlwnJR0RTWdRbD4PhaKea_iFgjllTzIELWIwJwseeKcJQPrEuyMFI4cWhbTGU-ZcnoKPr"
+                             src="/img-raw-diamonds.png"
                              loading="lazy"/>
                         <p class="text-center text-xs font-bold uppercase">Before: Raw Capture</p>
                     </div>
                     <div class="space-y-3">
                         <img class="rounded shadow-xl scale-110" alt="Hyper realistic polished diamond rendering with dramatic studio lighting"
-                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0BCFYMlJWa4dCdcT-z40MTcmOwAo3CPFbCKkmbhwU6P1Vl5_oTXi6GnKNANp-g1J3Ijy5PtzsgWjN6IAaoCElS_fGPivWz8xfg-zIcEQbxDEB3QKIbY2ih5oOjK22cakeeSjkAXin-AN8V1D5xvJodXI46EO5Yb83_9eWSZIDA_-Em4XkiPMVRDrlrKyW79Tu802h_IxCpOomexFB1JlhMP01VKsPmYIR7X1DO-fuyWf2HhqTyxffdwXIEULfjFwK6Lo5fOiYTX8b"
+                             src="/img-ai-render.png"
                              loading="lazy"/>
                         <p class="text-center text-xs font-bold uppercase text-primary">After: AI Render</p>
                     </div>
@@ -471,7 +628,7 @@
             <div class="reveal-left">
                 <img class="rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
                      alt="Futuristic warehouse dashboard showing real-time inventory tracking of precious gemstones"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuA28irQOKJEO2UbZC76ZbunDHZwTFDp6BYlLthcsNSsU2JYGRpov3OIxOrIMLgkt76ygG78ehxLVSZTxTbGoIbL6zLGA-bOMIogm0quDuduvrpJSblJF_dEajjXUxCE41BpYGUbxUFtQzvqkEHDq4_vW-b2Nv80ZNROjoi2HjAdjZ87OC-SAjK_4y0Wh_WCHL31v1r6s-zZA1vro9iR35Yur16YtSf-HCl_1QE7twqbPXIoH6jvB2kkfsstf0vqbIGQ6C1N3oRzYBQD"
+                     src="/img-rfid.png"
                      loading="lazy"/>
             </div>
             <div class="space-y-8 reveal-right">
@@ -502,32 +659,32 @@
                 <p class="text-on-surface-variant">The robust infrastructure that powers the world's leading jewelry enterprises.</p>
             </div>
             <div data-foundation-grid class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 stagger">
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">sync_alt</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Architectural POS Sync</h4>
                     <p class="text-on-surface-variant text-sm">Seamless, zero-latency synchronization between retail storefronts and your cloud ledger.</p>
                 </div>
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">description</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Invoicing &amp; Memoing</h4>
                     <p class="text-on-surface-variant text-sm">Automated high-end document generation for consignment, memoing, and retail sales.</p>
                 </div>
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">diversity_3</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Elite CRM Suites</h4>
                     <p class="text-on-surface-variant text-sm">Data-driven campaigns for high-net-worth individuals and lifetime value tracking.</p>
                 </div>
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">label</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Bespoke Labeling</h4>
                     <p class="text-on-surface-variant text-sm">Custom QR and RFID label designer for elegant, brand-consistent physical tags.</p>
                 </div>
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">menu_book</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Digital Catalogs</h4>
                     <p class="text-on-surface-variant text-sm">Instantly shareable, high-fidelity lookbooks for wholesale or private clients.</p>
                 </div>
-                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+                <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 foundation-card">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">history</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Historical Ledger</h4>
                     <p class="text-on-surface-variant text-sm">A permanent, immutable record of every gemstone's journey through your house.</p>
@@ -546,11 +703,11 @@
                     Comprehensive dashboards providing actionable clarity. Analyze sales history, purchase trends, and product cycles with an interface designed for executives.
                 </p>
                 <div class="space-y-3">
-                    <div class="flex items-center justify-between p-4 bg-white rounded shadow-sm">
+                    <div class="flex items-center justify-between p-4 rounded shadow-sm stat-card">
                         <span class="font-bold">Total Sales Cycle</span>
                         <span class="text-green-600 font-bold">+14.2% YoY</span>
                     </div>
-                    <div class="flex items-center justify-between p-4 bg-white rounded shadow-sm">
+                    <div class="flex items-center justify-between p-4 rounded shadow-sm stat-card">
                         <span class="font-bold">Inventory Turnover</span>
                         <span class="text-primary font-bold">2.4x</span>
                     </div>
@@ -559,7 +716,7 @@
             <div class="relative p-6 md:p-8 bg-surface-container-low rounded-2xl reveal-right">
                 <img class="rounded-lg shadow-xl"
                      alt="Clean minimalist analytics dashboard showing high-end charts and gemstone stock levels"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFc6J1li-gmCsPBPuMfEtwPxBy12gzm7SKWs3pOqWnhmAPox80ZOOXqH0NgBgg5Q5HHgu7KRJmaF1gdby_gHd9e_dCrCh9iTmG5A60zRfsJYoQ1NTnUWWEgzqB5fmwqWpAbnaMWoGC3oOQzUSlo52cGAptCjf4ul_EGk8w-qBEMzELk3hNYKnp4jDjqh60EBL9qTHAmMsAGc6Oz9w-1NCRBnXYJ9N60PGTvcusXljno0BNBlH0Pb5__d7X8J4qmg2KHjZy5Zuqa74u"
+                     src="/img-analytics.png"
                      loading="lazy"/>
                 <div class="absolute -top-4 -left-4 bg-primary text-on-primary px-5 py-3.5 rounded-lg shadow-lg">
                     <span class="text-xs uppercase tracking-widest font-bold">Live Report</span>
@@ -569,7 +726,7 @@
     </section>
 
     <!-- ===================== FLAGSHIP BUILDER ===================== -->
-    <section data-seo-section class="py-20 md:py-32 px-6 md:px-10 bg-white">
+    <section data-seo-section class="py-20 md:py-32 px-6 md:px-10" style="background:var(--white-surface)">
         <div class="max-w-[1440px] mx-auto text-center space-y-12">
             <div class="max-w-3xl mx-auto space-y-6 reveal">
                 <span class="text-primary font-bold uppercase tracking-tighter text-sm">Core Pillar: 09</span>
@@ -578,18 +735,40 @@
                     Don't just sell, inspire. Our AI-powered builder crafts bespoke, SEO-optimized digital boutiques that sync directly with your cloud inventory.
                 </p>
             </div>
-            <div data-seo-image class="relative max-w-5xl mx-auto reveal-scale">
-                <img class="rounded-xl shadow-2xl"
-                     alt="Modern minimalist office space with a computer showing a high-end luxury jewelry e-commerce website"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYDpQHrvd3aK7Q3fEVgZ6M4KUysexzDT4tMFuvAst-dm_AZdiAhDBl6Qqoa5uyrPVRV4F3Xp05eJDBYGrPlU5_dH1Ltbo73F6ODjYjHtP2GHIm-yaltkZD1wOI0cUZuzIpNigcyPV5QBEsEsq1rKrcLnQH_fQrm-O7sFOF7SIl5ZpwGXT7muuttSdHysSrFEp8n75yVeztq5iB3-oGNX7d1vfPdi9dfK390EHIvbihmqDF4hB__ylY8VLVDuJUE7SLyQ9zHM3v91P"
-                     loading="lazy"/>
-                <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+            <div data-seo-image class="relative max-w-5xl mx-auto reveal-scale overflow-hidden">
+                <div id="seoCarousel" class="flex transition-transform duration-700 ease-in-out">
+                    <div class="w-full flex-shrink-0">
+                        <img class="rounded-xl shadow-2xl w-full"
+                             alt="Drag-and-drop jewelry website builder interface with design components and live preview"
+                             src="/img-seo-builder.png" loading="lazy"/>
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <img class="rounded-xl shadow-2xl w-full"
+                             alt="SEO optimization dashboard showing keyword rankings and performance scores for a jewelry brand"
+                             src="/img-seo-dashboard.png" loading="lazy"/>
+                    </div>
+                    <div class="w-full flex-shrink-0">
+                        <img class="rounded-xl shadow-2xl w-full"
+                             alt="Mobile storefront preview of a luxury jewelry e-commerce app with product grid"
+                             src="/img-seo-mobile.png" loading="lazy"/>
+                    </div>
+                </div>
+                <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to top, var(--gradient-fade), transparent, transparent)"></div>
                 <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
-                    <div class="w-3 h-3 bg-primary rounded-full"></div>
-                    <div class="w-3 h-3 bg-primary/30 rounded-full"></div>
-                    <div class="w-3 h-3 bg-primary/30 rounded-full"></div>
+                    <button onclick="seoSlide(0)" class="seo-dot w-3 h-3 bg-primary rounded-full transition-all" data-index="0"></button>
+                    <button onclick="seoSlide(1)" class="seo-dot w-3 h-3 bg-primary/30 rounded-full transition-all" data-index="1"></button>
+                    <button onclick="seoSlide(2)" class="seo-dot w-3 h-3 bg-primary/30 rounded-full transition-all" data-index="2"></button>
                 </div>
             </div>
+            <script>
+            (function(){
+                let current=0;const carousel=document.getElementById('seoCarousel');
+                const dots=document.querySelectorAll('.seo-dot');
+                window.seoSlide=function(i){current=i;carousel.style.transform='translateX(-'+100*i+'%)';
+                dots.forEach((d,j)=>{d.className='seo-dot w-3 h-3 rounded-full transition-all '+(j===i?'bg-primary':'bg-primary/30')});};
+                setInterval(()=>{current=(current+1)%3;window.seoSlide(current)},4000);
+            })();
+            </script>
         </div>
     </section>
 
@@ -605,7 +784,7 @@
             <!-- Email capture -->
             <form id="subscribeForm" novalidate class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input type="email" name="email" required placeholder="Enter your email address"
-                    class="flex-1 px-5 py-4 bg-white/80 backdrop-blur-sm border border-white/40 rounded text-on-surface placeholder:text-on-surface-variant/60 text-sm focus:outline-none focus:border-primary focus:bg-white transition-all"/>
+                    class="flex-1 px-5 py-4 backdrop-blur-sm border rounded text-on-surface placeholder:text-on-surface-variant/60 text-sm focus:outline-none focus:border-primary transition-all" style="background:color-mix(in srgb, var(--white-surface) 80%, transparent);border-color:color-mix(in srgb, var(--white-surface) 40%, transparent)"/>
                 <button type="submit" id="subscribeSubmit"
                     class="px-8 py-4 bg-gradient-to-tr from-primary to-primary-container text-on-primary font-bold rounded shadow-xl shadow-primary/30 hover:shadow-2xl hover:scale-[1.02] transition-all active:scale-95 whitespace-nowrap disabled:opacity-60">
                     Join Waitlist

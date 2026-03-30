@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://caratcloud.net/sitemap.xml
+
+# IndexNow key for Bing instant indexing
+# Key file: https://caratcloud.net/f4c09678e0074be4af4deb7a138891a1.txt

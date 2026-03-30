@@ -84,61 +84,170 @@ function initLoader() {
 function initCursor() {
   if (isTouch) return;
 
-  // Inject cursor elements
+  // Hide default cursor
+  const cursorStyle = document.createElement('style');
+  cursorStyle.textContent = `*, *::before, *::after { cursor: none !important; }`;
+  document.head.appendChild(cursorStyle);
+
+  const cs = getComputedStyle(document.documentElement);
+  const primaryColor = cs.getPropertyValue('--primary').trim() || '#385d8e';
+
+  // 3D brilliant-cut diamond cursor — SVG gem with facets
   const dot = document.createElement('div');
   dot.id = 'cursor-dot';
-  const ring = document.createElement('div');
-  ring.id = 'cursor-ring';
+
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('width', '26');
+  svg.setAttribute('height', '28');
+  svg.setAttribute('viewBox', '0 0 26 28');
+  svg.style.overflow = 'visible';
+
+  // Brilliant-cut diamond: wide crown/table, flares to girdle, tapers to culet
+  const facets = [
+    // Crown table (wide bright top face)
+    { points: '4,0 22,0 26,8 0,8', fill: primaryColor, opacity: '1', filter: 'brightness(1.4)' },
+    // Crown left bezel facet
+    { points: '4,0 0,8 0,6', fill: primaryColor, opacity: '0.8', filter: 'brightness(1.1)' },
+    // Crown right bezel facet
+    { points: '22,0 26,6 26,8', fill: primaryColor, opacity: '0.8', filter: 'brightness(1.1)' },
+    // Pavilion left half (darker)
+    { points: '0,8 13,8 13,28', fill: primaryColor, opacity: '0.9', filter: 'brightness(0.75)' },
+    // Pavilion right half (slightly lighter)
+    { points: '13,8 26,8 13,28', fill: primaryColor, opacity: '0.95', filter: 'brightness(0.9)' },
+    // Center highlight line on pavilion
+    { points: '11,8 15,8 13,28', fill: '#ffffff', opacity: '0.1', filter: 'none' },
+    // Table highlight / brilliance
+    { points: '6,1 20,1 22,6 4,6', fill: '#ffffff', opacity: '0.18', filter: 'none' },
+  ];
+
+  facets.forEach(f => {
+    const poly = document.createElementNS(svgNS, 'polygon');
+    poly.setAttribute('points', f.points);
+    poly.setAttribute('fill', f.fill);
+    poly.setAttribute('opacity', f.opacity);
+    if (f.filter !== 'none') poly.setAttribute('filter', f.filter);
+    svg.appendChild(poly);
+  });
+
+  // Girdle line
+  const girdle = document.createElementNS(svgNS, 'line');
+  girdle.setAttribute('x1', '0'); girdle.setAttribute('y1', '8');
+  girdle.setAttribute('x2', '26'); girdle.setAttribute('y2', '8');
+  girdle.setAttribute('stroke', '#ffffff');
+  girdle.setAttribute('stroke-width', '0.5');
+  girdle.setAttribute('opacity', '0.3');
+  svg.appendChild(girdle);
+
+  dot.appendChild(svg);
 
   Object.assign(dot.style, {
-    position: 'fixed', top: 0, left: 0, width: '6px', height: '6px',
-    background: '#385d8e', borderRadius: '50%', pointerEvents: 'none',
-    zIndex: '9998', transform: 'translate(-50%, -50%)',
-    willChange: 'transform', transition: 'width 0.3s, height 0.3s, background 0.3s',
+    position: 'fixed', top: 0, left: 0,
+    display: 'flex', flexDirection: 'column', alignItems: 'center',
+    pointerEvents: 'none', zIndex: '9998',
+    willChange: 'transform',
+    filter: 'drop-shadow(0 0 6px var(--primary))',
+    transition: 'filter 0.3s',
   });
+
+  // Outer trailing ring — diamond silhouette
+  const ring = document.createElement('div');
+  ring.id = 'cursor-ring';
   Object.assign(ring.style, {
-    position: 'fixed', top: 0, left: 0, width: '36px', height: '36px',
-    border: '1.5px solid rgba(56,93,142,0.4)', borderRadius: '50%',
+    position: 'fixed', top: 0, left: 0, width: '32px', height: '32px',
+    border: '1.5px solid',
+    borderColor: 'color-mix(in srgb, var(--primary) 40%, transparent)',
+    clipPath: 'polygon(50% 0%, 100% 35%, 50% 100%, 0% 35%)',
     pointerEvents: 'none', zIndex: '9997',
-    transform: 'translate(-50%, -50%)', willChange: 'transform',
-    transition: 'width 0.3s, height 0.3s, border-color 0.3s',
+    willChange: 'transform',
+    transition: 'width 0.4s cubic-bezier(0.34,1.56,0.64,1), height 0.4s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s, background 0.3s',
+    background: 'color-mix(in srgb, var(--primary) 5%, transparent)',
   });
 
   document.body.appendChild(dot);
   document.body.appendChild(ring);
 
   let mx = -100, my = -100, rx = -100, ry = -100;
+  let vx = 0, vy = 0, prevMx = -100, prevMy = -100;
+  let tiltX = 0, tiltY = 0;
+  let rotAngle = 0;
+  let scrollSpin = 0; // scroll-driven spin velocity
+  let hovering = false;
 
   document.addEventListener('mousemove', (e) => {
+    vx = e.clientX - prevMx;
+    vy = e.clientY - prevMy;
+    prevMx = mx;
+    prevMy = my;
     mx = e.clientX;
     my = e.clientY;
-    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
   }, { passive: true });
 
-  // Laggy ring follow
-  (function lerpRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
-    requestAnimationFrame(lerpRing);
+  // Scroll drives continuous spinning
+  window.addEventListener('scroll', () => {
+    const dir = (() => {
+      const st = window.scrollY;
+      const d = st - (window._lastST || 0);
+      window._lastST = st;
+      return d;
+    })();
+    // Scroll down → spin right, scroll up → spin left (half speed)
+    scrollSpin += dir > 0 ? 1.5 : dir < 0 ? -1.5 : 0;
+    scrollSpin = Math.max(-8, Math.min(8, scrollSpin));
+  }, { passive: true });
+
+  (function tick() {
+    rx += (mx - rx) * 0.10;
+    ry += (my - ry) * 0.10;
+
+    // 3D tilt from velocity
+    const targetTiltY = Math.max(-40, Math.min(40, vx * 3));
+    const targetTiltX = Math.max(-40, Math.min(40, -vy * 3));
+    tiltX += (targetTiltX - tiltX) * 0.12;
+    tiltY += (targetTiltY - tiltY) * 0.12;
+
+    // Rotation toward movement direction (full 360°)
+    const speed = Math.sqrt(vx * vx + vy * vy);
+    if (speed > 1.5) {
+      const targetAngle = Math.atan2(vx, -vy) * (180 / Math.PI);
+      let diff = targetAngle - rotAngle;
+      if (diff > 180) diff -= 360;
+      if (diff < -180) diff += 360;
+      rotAngle += diff * 0.15;
+    }
+
+    // Apply scroll spin on top of movement rotation
+    rotAngle += scrollSpin;
+    scrollSpin *= 0.85; // stop quickly when scrolling stops
+
+    vx *= 0.88;
+    vy *= 0.88;
+
+    const dotScale = hovering ? 1.5 : 1;
+    dot.style.filter = hovering ? 'drop-shadow(0 0 10px var(--primary))' : 'drop-shadow(0 0 6px var(--primary))';
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) perspective(250px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) rotate(${rotAngle}deg) scale(${dotScale})`;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%) perspective(350px) rotateX(${tiltX * 0.5}deg) rotateY(${tiltY * 0.5}deg) rotate(${rotAngle * 0.6}deg)`;
+
+    requestAnimationFrame(tick);
   })();
 
-  // Expand on interactive elements
   const interactives = 'a, button, [data-modal], input, textarea, select';
   document.addEventListener('mouseover', (e) => {
     if (e.target.closest(interactives)) {
-      ring.style.width = '56px';
-      ring.style.height = '56px';
-      ring.style.borderColor = 'rgba(56,93,142,0.6)';
-      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(2.5)`;
+      hovering = true;
+      ring.style.width = '44px';
+      ring.style.height = '44px';
+      ring.style.borderColor = 'color-mix(in srgb, var(--primary) 60%, transparent)';
+      ring.style.background = 'color-mix(in srgb, var(--primary) 8%, transparent)';
     }
   }, { passive: true });
   document.addEventListener('mouseout', (e) => {
     if (e.target.closest(interactives)) {
-      ring.style.width = '36px';
-      ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(56,93,142,0.4)';
-      dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%) scale(1)`;
+      hovering = false;
+      ring.style.width = '32px';
+      ring.style.height = '32px';
+      ring.style.borderColor = 'color-mix(in srgb, var(--primary) 40%, transparent)';
+      ring.style.background = 'color-mix(in srgb, var(--primary) 5%, transparent)';
     }
   }, { passive: true });
 }
@@ -584,7 +693,7 @@ function initProgressBar() {
   bar.id = 'scroll-progress';
   Object.assign(bar.style, {
     position: 'fixed', top: '0', left: '0', height: '2px', width: '100%',
-    background: 'linear-gradient(90deg, #385d8e, #5276a8, #a5c8ff)',
+    background: 'linear-gradient(90deg, var(--primary), var(--primary-container, var(--primary)), #a5c8ff)',
     transformOrigin: 'left', transform: 'scaleX(0)',
     zIndex: '9999', pointerEvents: 'none',
   });
