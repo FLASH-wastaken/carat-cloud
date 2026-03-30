@@ -92,7 +92,7 @@
             background-color: #f7f9fb;
             color: #191c1e;
         }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
         h1, h2, h3, .font-serif { font-family: 'Noto Serif', serif; }
 
         .crystalline-glass {
@@ -212,7 +212,7 @@
 <body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
 
     <!-- Loader -->
-    <div id="loader" class="loader"><div class="loader-gem"></div></div>
+    <div id="loader" class="loader"><div class="loader-gem" data-loader-gem></div></div>
 
     <!-- ===================== CONTACT MODAL ===================== -->
     <div id="contactModal" class="modal-overlay fixed inset-0 z-[200] flex items-end sm:items-center justify-center p-0 sm:p-6">
@@ -297,6 +297,7 @@
 
     <!-- ===================== HERO ===================== -->
     <header id="suite" class="relative pt-32 pb-20 px-6 md:px-10 min-h-screen flex flex-col justify-center overflow-hidden">
+        <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
         <div class="absolute inset-0 -z-10 overflow-hidden">
             <div class="absolute top-[-10%] left-[-5%] w-[60%] h-[80%] bg-secondary-container/30 blur-[120px] rounded-full"></div>
             <div class="absolute bottom-[-10%] right-[-5%] w-[50%] h-[70%] bg-primary-fixed/20 blur-[100px] rounded-full"></div>
@@ -307,7 +308,9 @@
                     The 2030 Intelligence Suite
                 </div>
                 <h1 class="text-5xl sm:text-6xl lg:text-8xl leading-[1.05] font-headline font-semibold text-on-surface">
-                    Mastering <br/><span class="italic text-primary">Every Carat</span><br/>by Design.
+                    <span data-split-line class="block">Mastering</span>
+                    <span data-split-line class="block italic text-primary">Every Carat</span>
+                    <span data-split-line class="block">by Design.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-on-surface-variant font-body max-w-lg leading-relaxed">
                     The world's most sophisticated cloud ecosystem for diamond houses, jewelry artisans, and global retailers. Precision-cut intelligence for the modern era.
@@ -337,7 +340,7 @@
     </header>
 
     <!-- ===================== NEURAL PRICING ===================== -->
-    <section id="intelligence" class="py-20 md:py-32 px-6 md:px-10 bg-surface-container-low">
+    <section id="intelligence" data-intelligence class="py-20 md:py-32 px-6 md:px-10 bg-surface-container-low">
         <div class="max-w-[1440px] mx-auto">
             <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
                 <div class="w-full md:w-1/2 order-2 md:order-1 reveal-left">
@@ -376,7 +379,7 @@
                 </div>
                 <div class="w-full md:w-1/2 space-y-8 order-1 md:order-2 reveal-right">
                     <span class="text-primary font-bold uppercase tracking-tighter text-sm">Future Horizon: 01</span>
-                    <h2 class="text-4xl md:text-5xl font-headline font-semibold">Neural Pricing Arbitrage</h2>
+                    <h2 data-split class="text-4xl md:text-5xl font-headline font-semibold">Neural Pricing Arbitrage</h2>
                     <p class="text-lg text-on-surface-variant leading-relaxed">
                         Say goodbye to static pricing. Our neural engine monitors live diamond bourses and precious metal exchanges globally, instantly recalibrating your entire inventory value to ensure maximum margin on every transaction.
                     </p>
@@ -395,7 +398,7 @@
             <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
                 <div class="space-y-8 reveal-left">
                     <span class="text-primary font-bold uppercase tracking-tighter text-sm">Future Horizon: 02</span>
-                    <h2 class="text-4xl md:text-5xl font-headline font-semibold">Cinematic AR Visualization</h2>
+                    <h2 data-split class="text-4xl md:text-5xl font-headline font-semibold">Cinematic AR Visualization</h2>
                     <p class="text-lg text-on-surface-variant leading-relaxed">
                         Bridge the gap between digital and physical. Our proprietary spatial rendering engine allows clients to project any ring from your catalog onto their hand with hyper-realistic light refraction and occlusion.
                     </p>
@@ -459,8 +462,8 @@
     </section>
 
     <!-- ===================== RFID ===================== -->
-    <section class="py-20 md:py-32 px-6 md:px-10 bg-on-surface text-surface relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-primary/10 skew-x-12"></div>
+    <section data-rfid class="py-20 md:py-32 px-6 md:px-10 bg-on-surface text-surface relative overflow-hidden">
+        <div data-rfid-bg class="absolute top-0 right-0 w-1/2 h-full bg-primary/10 skew-x-12"></div>
         <div class="max-w-[1440px] mx-auto relative z-10 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div class="reveal-left">
                 <img class="rounded-xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
@@ -470,7 +473,7 @@
             </div>
             <div class="space-y-8 reveal-right">
                 <span class="text-primary-fixed-dim font-bold uppercase tracking-widest text-sm">Core Pillar: 05</span>
-                <h2 class="text-4xl md:text-6xl font-headline font-semibold">Omniscient RFID Control</h2>
+                <h2 data-split class="text-4xl md:text-6xl font-headline font-semibold">Omniscient RFID Control</h2>
                 <p class="text-lg md:text-xl text-surface-variant font-light leading-relaxed">
                     Never lose a carat again. Sub-millimeter precision tracking syncs every movement across your global network in real-time. From safe to showroom to sale — total visibility.
                 </p>
@@ -492,10 +495,10 @@
     <section class="py-20 md:py-32 px-6 md:px-10">
         <div class="max-w-[1440px] mx-auto">
             <div class="mb-16 text-center max-w-2xl mx-auto space-y-4 reveal">
-                <h2 class="text-4xl md:text-5xl font-headline font-semibold">Institutional Foundation</h2>
+                <h2 data-split class="text-4xl md:text-5xl font-headline font-semibold">Institutional Foundation</h2>
                 <p class="text-on-surface-variant">The robust infrastructure that powers the world's leading jewelry enterprises.</p>
             </div>
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 stagger">
+            <div data-foundation-grid class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 stagger">
                 <div class="bg-surface-container-low p-8 md:p-10 rounded-xl space-y-6 group hover:bg-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
                     <span class="material-symbols-outlined text-primary text-4xl group-hover:scale-110 transition-transform block">sync_alt</span>
                     <h4 class="text-xl md:text-2xl font-headline font-semibold">Architectural POS Sync</h4>
@@ -535,7 +538,7 @@
         <div class="max-w-[1440px] mx-auto grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             <div class="space-y-8 reveal-left">
                 <span class="text-primary font-bold uppercase tracking-tighter text-sm">Core Pillar: 08</span>
-                <h2 class="text-4xl md:text-5xl font-headline font-semibold">Precision Intelligence</h2>
+                <h2 data-split class="text-4xl md:text-5xl font-headline font-semibold">Precision Intelligence</h2>
                 <p class="text-lg text-on-surface-variant leading-relaxed">
                     Comprehensive dashboards providing actionable clarity. Analyze sales history, purchase trends, and product cycles with an interface designed for executives.
                 </p>
@@ -563,16 +566,16 @@
     </section>
 
     <!-- ===================== FLAGSHIP BUILDER ===================== -->
-    <section class="py-20 md:py-32 px-6 md:px-10 bg-white">
+    <section data-seo-section class="py-20 md:py-32 px-6 md:px-10 bg-white">
         <div class="max-w-[1440px] mx-auto text-center space-y-12">
             <div class="max-w-3xl mx-auto space-y-6 reveal">
                 <span class="text-primary font-bold uppercase tracking-tighter text-sm">Core Pillar: 09</span>
-                <h2 class="text-4xl md:text-6xl font-headline font-semibold">Global SEO &amp; Flagship Builder</h2>
+                <h2 data-split class="text-4xl md:text-6xl font-headline font-semibold">Global SEO &amp; Flagship Builder</h2>
                 <p class="text-lg md:text-xl text-on-surface-variant leading-relaxed">
                     Don't just sell, inspire. Our AI-powered builder crafts bespoke, SEO-optimized digital boutiques that sync directly with your cloud inventory.
                 </p>
             </div>
-            <div class="relative max-w-5xl mx-auto reveal-scale">
+            <div data-seo-image class="relative max-w-5xl mx-auto reveal-scale">
                 <img class="rounded-xl shadow-2xl"
                      alt="Modern minimalist office space with a computer showing a high-end luxury jewelry e-commerce website"
                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBYDpQHrvd3aK7Q3fEVgZ6M4KUysexzDT4tMFuvAst-dm_AZdiAhDBl6Qqoa5uyrPVRV4F3Xp05eJDBYGrPlU5_dH1Ltbo73F6ODjYjHtP2GHIm-yaltkZD1wOI0cUZuzIpNigcyPV5QBEsEsq1rKrcLnQH_fQrm-O7sFOF7SIl5ZpwGXT7muuttSdHysSrFEp8n75yVeztq5iB3-oGNX7d1vfPdi9dfK390EHIvbihmqDF4hB__ylY8VLVDuJUE7SLyQ9zHM3v91P"
@@ -588,10 +591,10 @@
     </section>
 
     <!-- ===================== CTA + EMAIL CAPTURE ===================== -->
-    <section class="py-28 md:py-40 px-6 md:px-10 bg-primary-fixed text-on-primary-fixed relative overflow-hidden">
+    <section data-cta-section class="py-28 md:py-40 px-6 md:px-10 bg-primary-fixed text-on-primary-fixed relative overflow-hidden">
         <div class="absolute inset-0 jewel-box opacity-20 pointer-events-none"></div>
         <div class="max-w-[1440px] mx-auto text-center relative z-10 space-y-10 reveal">
-            <h2 class="text-5xl sm:text-6xl md:text-8xl font-headline font-bold leading-tight">
+            <h2 data-split-cta class="text-5xl sm:text-6xl md:text-8xl font-headline font-bold leading-tight">
                 Ready to elevate<br/>your legacy?
             </h2>
             <p class="text-on-primary-fixed/70 uppercase tracking-[0.3em] font-bold text-sm">Join the Elite Houses of 2030</p>
@@ -768,5 +771,6 @@
 
         document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger').forEach(el => observer.observe(el));
     </script>
+    <script type="module" src="/animations.js"></script>
 </body>
 </html>
