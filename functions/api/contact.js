@@ -90,7 +90,7 @@ async function sendNotification(apiKey, to, { name, email, company, message }) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: 'Carat Cloud <noreply@caratcloud.com>',
+                from: 'Carat Cloud <noreply@caratcloud.net>',
                 to: [to],
                 subject: `New contact from ${name}`,
                 html: `

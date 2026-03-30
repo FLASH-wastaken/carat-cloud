@@ -79,7 +79,7 @@ async function sendWelcome(apiKey, email) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                from: 'Carat Cloud <noreply@caratcloud.com>',
+                from: 'Carat Cloud <noreply@caratcloud.net>',
                 to: [email],
                 subject: 'Welcome to Carat Cloud',
                 html: `
